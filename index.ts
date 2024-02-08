@@ -5,12 +5,21 @@ import http from "http";
 const app = express();
 const port = 3000;
 
-const path = "message.txt";
-const file = Bun.file(path);
-
 let speed = 10;
 
 var splitter = new GraphemeSplitter();
+
+async function getGreeting() {
+  const greetingFile = await Bun.file("greeting.txt").text();
+  const greetings = greetingFile.split("\n");
+  return greetings[Math.floor(Math.random() * greetings.length)];
+}
+
+async function getMessage() {
+  let messageFile = await Bun.file("message.txt").text();
+  messageFile = messageFile.replace("{greeting}", await getGreeting());
+  return messageFile;
+}
 
 // Middleware to set Content-Type and enable streaming
 app.use((req, res, next) => {
@@ -24,16 +33,16 @@ app.use((req, res, next) => {
 app.get("/stream", async (req, res) => {
   console.log("sending transmission to " + req.ip);
   // Send an initial response to establish the SSE connection
-  const body = await file.text();
+  const body = await getMessage();
 
   let delay = 0;
 
   // Send the body in chunks by letter with a delay of 10ms
-  splitter.splitGraphemes(body).forEach((char, index) => {
+  splitter.splitGraphemes(body).forEach((char) => {
     if (char === "🐢") {
       speed = 55;
     } else if (char === "🐇") {
-      speed = 10;
+      speed = 5;
     } else {
       setTimeout(
         () => {
