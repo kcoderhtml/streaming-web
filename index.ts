@@ -30,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 // Handle streaming
-app.get("/stream", async (req, res) => {
+app.get("/", async (req, res) => {
   console.log("sending transmission to " + req.ip);
   // Send an initial response to establish the SSE connection
   const body = await getMessage();
