@@ -1,0 +1,46 @@
+🐢---------------------
+START OF TRANSMISSION
+---------------------🐇
+
+Howdy 🤠! People call me Malted.
+I research computer graphics, write systems software,
+do funky 501(c)(3) stuff, and make computers crunch
+numbers in just the right way.
+
+Most days, I push to github.com/hackclub. Other days,
+I force push to github.com/malted. This site is open
+source; go and find it, and follow me while you're
+at it.
+
+It's my job to;
+Design hypertext documents
+Write hypertext documents
+💸 Give internet money wiiings 💸
+
+It's not my job to;
+Write shaders, yet I do it anyway
+
+You should read;
+☞ Why the Future Doesn't Need Us - Bill Joy for WIRED
+☞ The Year of Living Danishly - Helen Russell
+☞ docs.vulkan.org - KHRONOS Group
+☞ My Family and Other Animals - Gerald Durrell
+
+A random, awesome website I think you should visit;
+https://malted.dev/???
+
+As of 32m 14s ago, I'm in Vienna, Austria, which is
+11045km away from Westerville, Ohio. That's like, a
+whole world away. Why are you so far away? Why am I
+so far away?? Questions that could be rendered moot
+with a flight :)
+
+
+Message me @Malted on the Hack Club Slack, or email
+me at this domain. If you're in a pinch, call me at
+malted at malted dot dev. I've got plenty of battery
+right now (75%), so I'll probably answer your call.
+
+🐢-------------------
+END OF TRANSMISSION
+-------------------
