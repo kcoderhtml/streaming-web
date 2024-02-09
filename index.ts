@@ -34,3 +34,8 @@ const server = http.createServer(app);
 server.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
 });
+
+app.get("/favicon.ico", (req, res, next) => {
+  // pass the favicon file back to the browser
+  res.sendFile("content/favicon.ico", { root: "." });
+});
