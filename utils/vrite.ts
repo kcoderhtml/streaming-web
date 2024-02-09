@@ -1,18 +1,5 @@
 import { createClient } from "@vrite/sdk/api";
 
-import dotenv from "dotenv";
-
-const result = dotenv.config();
-
-if (result.error) {
-  console.error(result.error);
-  console.log(process.env);
-  throw result.error;
-} else {
-  console.log(result.parsed);
-  console.log(process.env);
-}
-
 const vrite = createClient({
   token: process.env.VRITE_ACCESS_TOKEN || "",
 });
