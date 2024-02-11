@@ -1,6 +1,6 @@
 import express from "express";
 import http from "http";
-import { getPosts } from "./utils/vrite.ts";
+import { getPostSummaries, getPostDetail } from "./utils/vrite.ts";
 import { getMessage } from "./utils/files.ts";
 import { streamData } from "./utils/streaming.ts";
 
@@ -23,8 +23,13 @@ app.get("/", async (req, res) => {
 
 // create blog mirror
 app.get("/blog", async (req, res) => {
-  const posts = await getPosts();
+  const posts = await getPostSummaries();
   streamData(req, res, posts);
+});
+
+app.get("/blog/:slug", async (req, res) => {
+  const post = await getPostDetail(req.params.slug);
+  streamData(req, res, post);
 });
 
 // Create HTTP server
