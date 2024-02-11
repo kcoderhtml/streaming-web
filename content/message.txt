@@ -16,6 +16,7 @@ let usr: Person = {
     "developer",
     "robotiscist",
     "treasurer/steering committee member of Purple Bubble",
+    "free stuff lover",
   ],
   hobbies: [
     "programming",
