@@ -1,10 +1,12 @@
 import { createClient } from "@vrite/sdk/api";
 import { gfmOutputTransformer } from "@vrite/sdk/transformers";
 
+// create vrite client with environment variable token
 const vrite = createClient({
   token: process.env.VRITE_ACCESS_TOKEN || "",
 });
 
+// get all the posts and return a markdown string with the post titles and descriptions
 export async function getPostSummaries(): Promise<any> {
   const vritePosts = await vrite.contentPieces.list({
     contentGroupId: process.env.VRITE_CONTENT_GROUP_ID || "",
@@ -24,6 +26,7 @@ export async function getPostSummaries(): Promise<any> {
   return body;
 }
 
+// get the content of a post by its slug and return it in markdown format
 export async function getPostDetail(slug: string): Promise<any> {
   const vritePosts = await vrite.contentPieces.list({
     contentGroupId: process.env.VRITE_CONTENT_GROUP_ID || "",

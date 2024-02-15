@@ -22,7 +22,7 @@ wrote: {bytes} bytes
 
 export function streamData(req: Request, res: Response, message: string) {
   console.log("sending transmission to " + req.ip);
-  // Send an initial response to establish the SSE connection
+
   // get total bytes of message and replace {bytes} in transmissionEnd with the number of bytes of the message
   const body =
     transmissionStart +
@@ -31,7 +31,7 @@ export function streamData(req: Request, res: Response, message: string) {
 
   let delay = 0;
 
-  // Send the body in chunks by letter with a delay of 10ms
+  // Send the body in chunks by letter with a variable delay
   splitter.splitGraphemes(body).forEach((char) => {
     if (char === "🐢") {
       speed = 55;
