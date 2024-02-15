@@ -21,4 +21,5 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           push: true
-          tags: kcoderhtml/streaming-web:${{ github.event.release.tag_name }}
+          # add the release tag to the image as well as the latest tag
+          tags: kcoderhtml/streaming-web:latest, kcoderhtml/streaming-web:${{ github.event.release.tag_name }}
