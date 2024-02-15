@@ -16,38 +16,41 @@ app.use((req, res, next) => {
   next();
 });
 
-// Handle streaming
+// return the favicon
+app.get("/favicon.ico", (req, res, next) => {
+  // pass the favicon file back to the browser
+  res.sendFile("content/favicon.ico", { root: "." });
+});
+
+// get the home page message and stream it
 app.get("/", async (req, res) => {
   const message = await getMessage();
   streamData(req, res, message);
 });
 
-// create blog mirror
+// get the blog posts's summaries and descriptions and stream them
 app.get("/blog", async (req, res) => {
   const posts = await getPostSummaries();
   streamData(req, res, posts);
 });
 
+// stream the blog post's content by slug
 app.get("/blog/:slug", async (req, res) => {
   const post = await getPostDetail(req.params.slug);
   streamData(req, res, post);
 });
 
+// get a gist by id and stream it
 app.get("/g/:id", async (req, res) => {
   const gist = await getGist(req.params.id);
 
   streamData(req, res, gist);
 });
 
-// Create HTTP server
+// Create server
 const server = http.createServer(app);
 
 // Start server
 server.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
-});
-
-app.get("/favicon.ico", (req, res, next) => {
-  // pass the favicon file back to the browser
-  res.sendFile("content/favicon.ico", { root: "." });
 });
