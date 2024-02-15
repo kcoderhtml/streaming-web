@@ -3,6 +3,7 @@ import http from "http";
 import { getPostSummaries, getPostDetail } from "./utils/vrite.ts";
 import { getMessage } from "./utils/files.ts";
 import { streamData } from "./utils/streaming.ts";
+import { getGist } from "./utils/apis.ts";
 
 const app = express();
 const port = 3000;
@@ -30,6 +31,12 @@ app.get("/blog", async (req, res) => {
 app.get("/blog/:slug", async (req, res) => {
   const post = await getPostDetail(req.params.slug);
   streamData(req, res, post);
+});
+
+app.get("/g/:id", async (req, res) => {
+  const gist = await getGist(req.params.id);
+
+  streamData(req, res, gist);
 });
 
 // Create HTTP server
