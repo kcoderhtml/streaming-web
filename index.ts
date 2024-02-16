@@ -49,7 +49,7 @@ app.get("/g/:id", async (req, res) => {
 });
 
 // #10daysinpublic leaderboard
-app.get("/s/10days", async (req, res) => {
+app.get("/s/10daysinpublic", async (req, res) => {
   const leaderboard = await get10DaysLeaderboard(
     new Date("2024-02-15"),
     new Date("2024-02-30"),
