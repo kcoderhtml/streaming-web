@@ -37,6 +37,8 @@ export function streamData(req: Request, res: Response, message: string) {
       speed = 55;
     } else if (char === "🐇") {
       speed = 5;
+    } else if (char === "🚀") {
+      speed = 1;
     } else {
       setTimeout(
         () => {
