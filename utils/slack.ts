@@ -53,7 +53,7 @@ function generateLeaderboardTable(users: user[]): string {
   ].join("\n");
 }
 
-export async function get10DaysLeaderboard() {
+export async function get10DaysLeaderboard(start: Date, end: Date) {
   const users: user[] = [];
 
   const response = await fetch(
@@ -69,8 +69,8 @@ export async function get10DaysLeaderboard() {
     );
 
     if (
-      timestampAdjusted.getTime() < new Date("2024-02-15").getTime() ||
-      timestampAdjusted.getTime() > new Date("2024-02-30").getTime()
+      timestampAdjusted.getTime() < start.getTime() ||
+      timestampAdjusted.getTime() > end.getTime()
     ) {
       return;
     }
@@ -92,7 +92,7 @@ export async function get10DaysLeaderboard() {
   });
 
   // display the leaderboard in markdown format
-  const leaderboardFormatted = `# 10 Days in Public Leaderboard\n\n${generateLeaderboardTable(users)}`;
+  const leaderboardFormatted = `# 10 Days in Public Leaderboard from ${start.toISOString().split("T")[0]} to ${end.toISOString().split("T")[0]}\nGood Luck and have fun!\n\n${generateLeaderboardTable(users)}`;
 
   return leaderboardFormatted;
 }
