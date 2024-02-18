@@ -12,7 +12,6 @@ type: text/event-stream
 
 `;
 const transmissionEnd = `
-
 🐢-------------------
 END OF TRANSMISSION
 status: 200
