@@ -10,7 +10,7 @@ type Person = {
 let usr: Person = {
   name: "Kieran",
   nomeDeGuerra: "Kieran",
-  age: 15.834,
+  age: {age},
   roles: [
     "student",
     "developer",
@@ -28,7 +28,7 @@ let usr: Person = {
   ],
   isAlive: true,
 };
-
 console.log(usr);
 
 console.log("{greeting} This is my plain text site!");
+console.log("{slack_status}");

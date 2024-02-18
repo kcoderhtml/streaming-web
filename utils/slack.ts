@@ -104,3 +104,23 @@ export async function get10DaysLeaderboard(start: Date, end: Date) {
 
   return leaderboardFormatted;
 }
+
+export async function getSlackStatus() {
+  // get slack status from the slack API
+  const response = await fetch(
+    "https://slack.com/api/users.getPresence?user=U062UG485EE&pretty=1",
+    {
+      headers: {
+        Authorization: `Bearer ${process.env.SLACK_OAUTH_TOKEN}`,
+      },
+    },
+  );
+
+  const status = await response.json();
+
+  return status.presence === "active"
+    ? new Date().getHours() > 20 && new Date().getHours() < 8
+      ? "I'm currently listed as active on slack but i probably forgot to set myself not active :)"
+      : "I'm currently listed as active on slack :)"
+    : "I'm currently listed as not active on slack :( catch you later?";
+}
