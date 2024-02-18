@@ -36,14 +36,12 @@ function generateLeaderboardTable(users: user[]): string {
 
     const userCell = ` ${user.user}${" ".repeat(maxUsernameLength - user.user.length)} `;
     const cells = uniqueTimestamps.map((timestamp, index) => {
-      const date = postsByDate.has(timestamp)
-        ? user.posts.find(
-            (p) => p.timestamp.toISOString().split("T")[0] === timestamp,
-          )
-        : null;
+      const date = user.posts.filter(
+        (post) => post.timestamp.toISOString().split("T")[0] === timestamp,
+      );
 
-      return date
-        ? ` ✓ ${date.timestamp.getUTCHours()}:${user.posts[0].timestamp.getUTCMinutes()}:${user.posts[0].timestamp.getUTCSeconds()}`.padEnd(
+      return date[0]
+        ? `${date.length > 1 ? `${date.length}` : "✓"} ${date[0].timestamp.getUTCHours()}:${date[0].timestamp.getUTCMinutes()}:${date[0].timestamp.getUTCSeconds()}`.padEnd(
             dateLengths[index] + 2,
           )
         : " ".repeat(dateLengths[index] + 2);
@@ -100,7 +98,7 @@ export async function get10DaysLeaderboard(start: Date, end: Date) {
   });
 
   // display the leaderboard in markdown format
-  const leaderboardFormatted = `# 10 Days in Public Leaderboard from ${start.toISOString().split("T")[0]} to ${end.toISOString().split("T")[0]}\n\nGood Luck and have fun!\nTime next to the checkmarks is given in h:m:s local time for that user🚀\n\n${generateLeaderboardTable(users)}`;
+  const leaderboardFormatted = `# 10 Days in Public Leaderboard from ${start.toISOString().split("T")[0]} to ${end.toISOString().split("T")[0]}\n\nGood Luck and have fun!\nTime next to the checkmarks is given in h:m:s local time for that user🚀\n\n${generateLeaderboardTable(users)}\n`;
 
   return leaderboardFormatted;
 }
