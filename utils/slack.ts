@@ -103,6 +103,31 @@ export async function get10DaysLeaderboard(start: Date, end: Date) {
   return leaderboardFormatted;
 }
 
+export async function get10daysDetailForUser(user: string) {
+  const response = (
+    await fetch("https://scrapbook.hackclub.com/api/r/10daysinpublic")
+  ).json();
+
+  const posts = (await response)
+    .filter(
+      (post: any) => post.user.username.toLowerCase() === user.toLowerCase(),
+    )
+    .sort((a: any, b: any) => a.timestamp - b.timestamp);
+
+  return posts.length > 0
+    ? `# ${user}\n` +
+        posts.map((post: any) => {
+          const timestampAdjusted = new Date();
+          timestampAdjusted.setTime(
+            (post.timestamp + post.user.timezoneOffset) * 1000,
+          );
+
+          return `\n---\n${timestampAdjusted.toISOString().split("T")[0]} at ${timestampAdjusted.getUTCHours()}:${timestampAdjusted.getUTCMinutes()}:${timestampAdjusted.getUTCSeconds()} - ${post.text}`;
+        }) +
+        "\n---\n"
+    : "No posts found for this user\n";
+}
+
 export async function getSlackStatus() {
   // get slack status from the slack API
   const response = await fetch(

@@ -4,7 +4,7 @@ import { getPostSummaries, getPostDetail } from "./utils/vrite.ts";
 import { getMessage } from "./utils/files.ts";
 import { streamData } from "./utils/streaming.ts";
 import { getGist } from "./utils/apis.ts";
-import { get10DaysLeaderboard } from "./utils/slack.ts";
+import { get10DaysLeaderboard, get10daysDetailForUser } from "./utils/slack.ts";
 
 const app = express();
 const port = 3000;
@@ -55,6 +55,14 @@ app.get("/s/10daysinpublic", async (req, res) => {
     new Date("2024-02-30"),
   );
   streamData(req, res, leaderboard);
+});
+
+app.get("/s/10daysinpublic/:user", async (req, res) => {
+  const userDetail = await get10daysDetailForUser(
+    decodeURIComponent(req.params.user),
+  );
+
+  streamData(req, res, userDetail);
 });
 
 // Create server
