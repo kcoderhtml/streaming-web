@@ -98,7 +98,7 @@ export async function get10DaysLeaderboard(start: Date, end: Date) {
   });
 
   // display the leaderboard in markdown format
-  const leaderboardFormatted = `# 10 Days in Public Leaderboard from ${start.toISOString().split("T")[0]} to ${end.toISOString().split("T")[0]}\n\nGood Luck and have fun!\nTime next to the checkmarks is given in h:m:s local time for that user🚀\n\n${generateLeaderboardTable(users)}\n`;
+  const leaderboardFormatted = `# 10 Days in Public Leaderboard from ${start.toISOString().split("T")[0]} to ${end.toISOString().split("T")[0]}\n\nGood Luck and have fun!\nTime next to the checkmarks is given in h:m:s local time for that user🚀\nYou can find out specific details per user by going to https://m.kieranklukas.com/s/10daysinpublic/userid\n\n${generateLeaderboardTable(users)}\n`;
 
   return leaderboardFormatted;
 }
