@@ -98,9 +98,34 @@ export async function get10DaysLeaderboard(start: Date, end: Date) {
   });
 
   // display the leaderboard in markdown format
-  const leaderboardFormatted = `# 10 Days in Public Leaderboard from ${start.toISOString().split("T")[0]} to ${end.toISOString().split("T")[0]}\n\nGood Luck and have fun!\nTime next to the checkmarks is given in h:m:s local time for that user🚀\n\n${generateLeaderboardTable(users)}\n`;
+  const leaderboardFormatted = `# 10 Days in Public Leaderboard from ${start.toISOString().split("T")[0]} to ${end.toISOString().split("T")[0]}\n\nGood Luck and have fun!\nTime next to the checkmarks is given in h:m:s local time for that user🚀\nYou can find out specific details per user by going to https://m.kieranklukas.com/s/10daysinpublic/userid\n\n${generateLeaderboardTable(users)}\n`;
 
   return leaderboardFormatted;
+}
+
+export async function get10daysDetailForUser(user: string) {
+  const response = (
+    await fetch("https://scrapbook.hackclub.com/api/r/10daysinpublic")
+  ).json();
+
+  const posts = (await response)
+    .filter(
+      (post: any) => post.user.username.toLowerCase() === user.toLowerCase(),
+    )
+    .sort((a: any, b: any) => a.timestamp - b.timestamp);
+
+  return posts.length > 0
+    ? `# ${user}\n` +
+        posts.map((post: any) => {
+          const timestampAdjusted = new Date();
+          timestampAdjusted.setTime(
+            (post.timestamp + post.user.timezoneOffset) * 1000,
+          );
+
+          return `\n---\n${timestampAdjusted.toISOString().split("T")[0]} at ${timestampAdjusted.getUTCHours()}:${timestampAdjusted.getUTCMinutes()}:${timestampAdjusted.getUTCSeconds()} - ${post.text}`;
+        }) +
+        "\n---\n"
+    : "No posts found for this user\n";
 }
 
 export async function getSlackStatus() {
