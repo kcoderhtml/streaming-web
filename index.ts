@@ -65,8 +65,33 @@ app.get("/s/10daysinpublic/:user", async (req, res) => {
   streamData(req, res, userDetail);
 });
 
+let logger = (req, res, next) => {
+  let current_datetime = new Date();
+  let formatted_date =
+    current_datetime.getFullYear() +
+    "-" +
+    (current_datetime.getMonth() + 1) +
+    "-" +
+    current_datetime.getDate() +
+    " " +
+    current_datetime.getHours() +
+    ":" +
+    current_datetime.getMinutes() +
+    ":" +
+    current_datetime.getSeconds();
+  let method = req.method;
+  let url = req.url;
+  let status = res.statusCode;
+  let user_agent = req.headers["user-agent"];
+  let log = `[${formatted_date}] ${method}:${url} ${status} ${user_agent}`;
+  console.log(log);
+};
+
 // Create server
 const server = http.createServer(app);
+
+// add logging middleware
+server.on("request", logger);
 
 // Start server
 server.listen(port, () => {
