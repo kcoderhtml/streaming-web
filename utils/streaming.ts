@@ -20,8 +20,6 @@ wrote: {bytes} bytes
 `;
 
 export function streamData(req: Request, res: Response, message: string) {
-  console.log("sending transmission to " + req.ip);
-
   // get total bytes of message and replace {bytes} in transmissionEnd with the number of bytes of the message
   const body =
     transmissionStart +
@@ -51,6 +49,5 @@ export function streamData(req: Request, res: Response, message: string) {
   // Close the connection after sending the last chunk
   setTimeout(() => {
     res.end();
-    console.log("finished sending transmission");
   }, delay);
 }
