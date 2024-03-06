@@ -1,7 +1,7 @@
 import express from "express";
 import http from "http";
 import { getPostSummaries, getPostDetail } from "./utils/vrite.ts";
-import { getMessage } from "./utils/files.ts";
+import { getMessage, getPortfolio } from "./utils/files.ts";
 import { streamData } from "./utils/streaming.ts";
 import { getGist } from "./utils/apis.ts";
 import { get10DaysLeaderboard, get10daysDetailForUser } from "./utils/slack.ts";
@@ -63,6 +63,18 @@ app.get("/s/10daysinpublic/:user", async (req, res) => {
   );
 
   streamData(req, res, userDetail);
+});
+
+app.get("/portfolio", async (req, res) => {
+  const portfolio = await getPortfolio("");
+
+  streamData(req, res, portfolio);
+});
+
+app.get("/portfolio/:companyID", async (req, res) => {
+  const portfolio = await getPortfolio(req.params.companyID);
+
+  streamData(req, res, portfolio);
 });
 
 let logger = (req: any, res: any, next: any) => {

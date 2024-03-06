@@ -26,3 +26,36 @@ export async function getMessage() {
   messageFile = messageFile.replace("{slack_status}", await getSlackStatus());
   return messageFile;
 }
+
+// get porfolio from a file and return it
+
+export async function getPortfolio(companyID: string) {
+  let portfolioFile = await Bun.file("content/portfolio.md").text();
+
+  portfolioFile = portfolioFile.replace(
+    "{date}",
+    new Date().toISOString().split("T")[0],
+  );
+
+  // extract the company specific data from the portfolio file as denoted by "==={name}===" and ===end===
+
+  const companyData = portfolioFile.match(/===(.*?)===\n(.*?)\n===end===/gs);
+
+  // remove the company specific data from the portfolio file and replace it with the extracted information related to the company
+
+  if (companyData) {
+    companyData.forEach((company) => {
+      if (company.includes(`==={${companyID}}===`)) {
+        const companyData = company.split("\n");
+        const companyContent = companyData[1].trim();
+        portfolioFile = portfolioFile.replace(company, `\n${companyContent}`);
+      } else {
+        portfolioFile = portfolioFile.replace(company, "");
+        // remove the trailing empty lines
+        portfolioFile = portfolioFile.replace(/\n+$/, "");
+      }
+    });
+  }
+
+  return portfolioFile + "\n";
+}
