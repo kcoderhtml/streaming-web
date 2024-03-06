@@ -2,7 +2,7 @@
 
 # The Beginning
 
-I started out as a baby, as we all do; but soon I grew older as we all do.
+I started out as a baby, as we all do; but soon I grew and became a teenager. This is my story.
 
 My parents have always told me that I was a very curious child. I got a set of tools for my 7th birthday and I immediately setup a small workshop in the basement of our house. I aquired several lights and a proper size hammer and thought it was the best thing ever. I would spend hours in the basement, bashing various rocks and watching them spark and frustrating my parents to no end with the damage I was doing to the concrete floor. My favorite thing to do was to take our recycling bin and find containers that would hold water, I would then use straws to build elaborate water systems that would flow from one container to another. I always wanted it to be more complex and interesting than the last.
 
