@@ -65,7 +65,7 @@ app.get("/s/10daysinpublic/:user", async (req, res) => {
   streamData(req, res, userDetail);
 });
 
-let logger = (req, res, next) => {
+let logger = (req: any, res: any, next: any) => {
   let current_datetime = new Date();
   let formatted_date =
     current_datetime.getFullYear() +
