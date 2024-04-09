@@ -8,3 +8,4 @@ services:
     environment:
       - VRITE_ACCESS_TOKEN='xxxxx:-xxxxxx'
       - VRITE_CONTENT_GROUP_ID='xxxxxxxxx'
+      - ARCJET_KEY='ajkey_xxxxx'
