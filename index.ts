@@ -83,24 +83,13 @@ app.get("/portfolio/:companyID", async (req, res) => {
 
 let logger = (req: any, res: any, next: any) => {
   let current_datetime = new Date();
-  let formatted_date =
-    current_datetime.getFullYear() +
-    "-" +
-    (current_datetime.getMonth() + 1) +
-    "-" +
-    current_datetime.getDate() +
-    " " +
-    current_datetime.getHours() +
-    ":" +
-    current_datetime.getMinutes() +
-    ":" +
-    current_datetime.getSeconds();
+  let formatted_date = current_datetime.toISOString();
   let method = req.method;
   let url = req.url;
   let status = res.statusCode;
   let user_agent = req.headers["user-agent"];
-  let log = `[${formatted_date}] ${method}:${url} ${status} ${user_agent}`;
-  console.log(log);
+  let log = `\x1b[36m[${formatted_date}]\x1b[0m ${method}:${url} ${status} ${user_agent}`;
+  console.log(log); // Highlight log in cyan color
 };
 
 // Create server
