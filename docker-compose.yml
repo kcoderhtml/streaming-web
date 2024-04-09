@@ -3,8 +3,9 @@ services:
   streaming-web:
     ports:
       - 3306:3000
-    image: kcoderhtml/streaming-web:v0.2.2
+    image: kcoderhtml/streaming-web:latest
     restart: unless-stopped
     environment:
       - VRITE_ACCESS_TOKEN='xxxxx:-xxxxxx'
       - VRITE_CONTENT_GROUP_ID='xxxxxxxxx'
+      - ARCJET_KEY='ajkey_xxxxx'
