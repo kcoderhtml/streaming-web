@@ -11,7 +11,11 @@ const port = 3000;
 
 // Middleware to set Content-Type and enable streaming
 app.use((req, res, next) => {
-  res.setHeader("Content-Type", "text/event-stream; charset=utf-8");
+  if ((req.headers["user-agent"] as string).includes("Firefox")) {
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  } else {
+    res.setHeader("Content-Type", "text/event-stream; charset=utf-8");
+  }
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
   next();
@@ -26,7 +30,7 @@ app.get("/favicon.ico", (req, res, next) => {
 // get the home page message and stream it
 app.get("/", async (req, res) => {
   const message = await getMessage();
-  streamData(req, res, message);
+  streamData(req, res, message, res.get("Content-Type"));
 });
 
 // get the blog posts's summaries and descriptions and stream them
@@ -79,24 +83,13 @@ app.get("/portfolio/:companyID", async (req, res) => {
 
 let logger = (req: any, res: any, next: any) => {
   let current_datetime = new Date();
-  let formatted_date =
-    current_datetime.getFullYear() +
-    "-" +
-    (current_datetime.getMonth() + 1) +
-    "-" +
-    current_datetime.getDate() +
-    " " +
-    current_datetime.getHours() +
-    ":" +
-    current_datetime.getMinutes() +
-    ":" +
-    current_datetime.getSeconds();
+  let formatted_date = current_datetime.toISOString();
   let method = req.method;
   let url = req.url;
   let status = res.statusCode;
   let user_agent = req.headers["user-agent"];
-  let log = `[${formatted_date}] ${method}:${url} ${status} ${user_agent}`;
-  console.log(log);
+  let log = `\x1b[36m[${formatted_date}]\x1b[0m ${method}:${url} ${status} ${user_agent}`;
+  console.log(log); // Highlight log in cyan color
 };
 
 // Create server
@@ -108,4 +101,5 @@ server.on("request", logger);
 // Start server
 server.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
+  console.log(`Visit http://localhost:${port}`);
 });

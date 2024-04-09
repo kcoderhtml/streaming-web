@@ -7,7 +7,7 @@ let speed = 10;
 
 const transmissionStart = `🐢---------------------
 START OF TRANSMISSION
-type: text/event-stream
+type: {contentType}
 ---------------------🐇
 
 `;
@@ -19,10 +19,10 @@ wrote: {bytes} bytes
 -------------------
 `;
 
-export function streamData(req: Request, res: Response, message: string) {
+export function streamData(req: Request, res: Response, message: string, contentType: string = "text/plain") {
   // get total bytes of message and replace {bytes} in transmissionEnd with the number of bytes of the message
   const body =
-    transmissionStart +
+    transmissionStart.replace("{contentType}", contentType) +
     message +
     transmissionEnd.replace("{bytes}", Buffer.byteLength(message).toString());
 
