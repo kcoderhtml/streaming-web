@@ -11,7 +11,11 @@ const port = 3000;
 
 // Middleware to set Content-Type and enable streaming
 app.use((req, res, next) => {
-  res.setHeader("Content-Type", "text/event-stream; charset=utf-8");
+  if ((req.headers["user-agent"] as string).includes("Firefox")) {
+    res.setHeader("Content-Type", "text/plain; charset=utf-8");
+  } else {
+    res.setHeader("Content-Type", "text/event-stream; charset=utf-8");
+  }
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
   next();
@@ -26,7 +30,7 @@ app.get("/favicon.ico", (req, res, next) => {
 // get the home page message and stream it
 app.get("/", async (req, res) => {
   const message = await getMessage();
-  streamData(req, res, message);
+  streamData(req, res, message, res.get("Content-Type"));
 });
 
 // get the blog posts's summaries and descriptions and stream them
@@ -108,4 +112,5 @@ server.on("request", logger);
 // Start server
 server.listen(port, () => {
   console.log(`Server is listening on port ${port}`);
+  console.log(`Visit http://localhost:${port}`);
 });
