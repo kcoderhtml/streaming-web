@@ -1,5 +1,9 @@
 import express from "express";
-import arcjet, { fixedWindow } from "@arcjet/node";
+import arcjet, {
+  createRemoteClient,
+  defaultBaseUrl,
+} from "@arcjet/node";
+import { createConnectTransport } from "@connectrpc/connect-web";
 import http from "http";
 import { getPostSummaries, getPostDetail } from "./utils/vrite.ts";
 import { getMessage, getPortfolio } from "./utils/files.ts";
@@ -10,10 +14,21 @@ import { get10DaysLeaderboard, get10daysDetailForUser } from "./utils/slack.ts";
 const app = express();
 const port = 3000;
 
+const transport = createConnectTransport({
+  baseUrl: defaultBaseUrl(),
+  fetch,
+});
+
+const client = createRemoteClient({
+  transport,
+  baseUrl: defaultBaseUrl(),
+  timeout: 500,
+});
+
 const aj = arcjet({
   key: process.env.ARCJET_KEY!,
-
   rules: [],
+  client,
 });
 
 
