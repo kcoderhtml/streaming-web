@@ -38,20 +38,20 @@ I hope to get an internship this summer at Brilliant Labs and I'm excited to see
 
 # TLDR
 
-|-- 0th Birthday: Born
-|
-|-- 7th Birthday: Got tools and started building water systems in the basement
-|
-|-- 10th Birthday: Got a BBC micro:bit and started coding
-|
-|-- 10.5th Birthday: Got a raspberry pi and started using linux
-|
-|-- 11.5th Birthday: Started using ubuntu as my main OS
-|
-|-- 12th Birthday: Started dual booting with windows
-|
-|-- 13th Birthday: Built first PC and got into Blender
-|
-|-- 14th Birthday: Got first server and started a homelab
-|
-|-- 15th Birthday: Currently working on Purple Bubble, building electronics projects, working on websites and other coding projects, and building a robot with my FRC team
+|-- 0th Birthday: Born  
+|  
+|-- 7th Birthday: Got tools and started building water systems in the basement  
+|  
+|-- 10th Birthday: Got a BBC micro:bit and started coding  
+|  
+|-- 10.5th Birthday: Got a raspberry pi and started using linux  
+|  
+|-- 11.5th Birthday: Started using ubuntu as my main OS  
+|  
+|-- 12th Birthday: Started dual booting with windows  
+|  
+|-- 13th Birthday: Built first PC and got into Blender  
+|  
+|-- 14th Birthday: Got first server and started a homelab  
+|  
+|-- 15th Birthday: Currently working on Purple Bubble, building electronics projects, working on websites and other coding projects, and building a robot with my FRC team  
