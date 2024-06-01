@@ -34,8 +34,10 @@ const aj = arcjet({
 
 // Middleware to set Content-Type and enable streaming
 app.use((req, res, next) => {
-  if ((req.headers["user-agent"] as string).includes("Firefox")) {
+  const userAgent = req.headers["user-agent"] as string;
+  if (userAgent.includes("Firefox") || userAgent.includes("MSIE")) {
     res.setHeader("Content-Type", "text/plain; charset=utf-8");
+    res.setHeader("Content-Disposition", "inline"); // This will display content in browser
   } else {
     res.setHeader("Content-Type", "text/event-stream; charset=utf-8");
   }
